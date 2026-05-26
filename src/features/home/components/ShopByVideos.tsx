@@ -230,7 +230,7 @@ export const ShopByVideos = () => {
 
                     <Link
                       href="/contact"
-                      onClick={handleLinkClick}
+                      onClickCapture={handleLinkClick}
                       className="group/btn inline-flex items-center justify-center gap-1.5 px-4 py-2.5 w-full rounded-full bg-gradient-to-r from-bronze-500 to-bronze-600 hover:from-bronze-400 hover:to-bronze-500 text-white font-semibold shadow-md transition-all duration-300 text-xs"
                     >
                       Inquire Product

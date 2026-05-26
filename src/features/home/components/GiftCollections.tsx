@@ -92,7 +92,7 @@ export const GiftCollections = () => {
   };
 
   return (
-    <section className="py-10 md:py-12 relative overflow-hidden section-glass-ambient ambient-purple border-y border-bronze-500/10">
+    <section className="py-6 md:py-12 relative overflow-hidden section-glass-ambient ambient-purple border-y border-bronze-500/10">
       {/* Background patterns */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/5 rounded-full blur-[120px]" />
@@ -143,7 +143,7 @@ export const GiftCollections = () => {
           ref={scrollRef}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
-          className="flex overflow-x-auto gap-6 pb-8 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth"
+          className="flex overflow-x-auto gap-6 pb-4 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none"
@@ -200,7 +200,7 @@ export const GiftCollections = () => {
 
                   <Link
                     href="/contact"
-                    onClick={handleLinkClick}
+                    onClickCapture={handleLinkClick}
                     className="group/btn inline-flex items-center justify-center gap-1.5 px-5 py-3 w-full rounded-full bg-gradient-to-r from-bronze-500 to-bronze-600 hover:from-bronze-400 hover:to-bronze-500 text-white font-semibold shadow-md shadow-bronze-500/10 hover:shadow-lg hover:shadow-bronze-500/25 transition-all duration-300 text-xs"
                   >
                     Request Gifting Details

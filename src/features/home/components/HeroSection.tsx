@@ -35,7 +35,7 @@ export const HeroSection = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
-    }, 6000);
+    }, 4000);
     return () => clearInterval(timer);
   }, [current]);
 
@@ -80,8 +80,8 @@ export const HeroSection = () => {
       x: 0,
       opacity: 1,
       transition: {
-        x: { type: "tween", ease: "easeInOut", duration: 0.35 },
-        opacity: { duration: 0.3 }
+        x: { type: "tween", ease: "easeInOut", duration: 0.25 },
+        opacity: { duration: 0.2 }
       }
     },
     exit: (dir: number) => ({
@@ -89,8 +89,8 @@ export const HeroSection = () => {
       x: dir < 0 ? "100%" : "-100%",
       opacity: 0,
       transition: {
-        x: { type: "tween", ease: "easeInOut", duration: 0.35 },
-        opacity: { duration: 0.3 }
+        x: { type: "tween", ease: "easeInOut", duration: 0.25 },
+        opacity: { duration: 0.2 }
       }
     })
   };
@@ -111,7 +111,7 @@ export const HeroSection = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-40 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-32 pb-12 lg:pt-40 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-none">
@@ -171,7 +171,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Right — Bronze Product Showcase Slider */}
-          <div className="relative w-full h-[550px] lg:h-[600px] flex items-center justify-center">
+          <div className="relative w-full h-auto py-8 md:py-0 md:h-[550px] lg:h-[600px] flex items-center justify-center">
             {/* Main Interactive Slider */}
             <div 
               onTouchStart={handleTouchStart}
@@ -179,42 +179,59 @@ export const HeroSection = () => {
               onTouchEnd={handleTouchEnd}
               className="relative w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-bronze-900/20 dark:shadow-black/30 bg-black/10"
             >
-              {/* Hardware-accelerated sliding track */}
-              <div 
-                className="flex h-full transition-transform duration-500 ease-out"
-                style={{
-                  width: `${slides.length * 100}%`,
-                  transform: `translateX(-${(current * 100) / slides.length}%)`
-                }}
-              >
-                {slides.map((slide, index) => (
-                  <div key={index} className="relative w-full h-full flex-shrink-0">
-                    <Image
-                      src={slide.src}
-                      alt={slide.title}
-                      fill
-                      sizes="(max-w-450px) 100vw, 450px"
-                      priority={index === 0}
-                      className="object-cover pointer-events-none"
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                    
-                    {/* Slide Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none">
-                      <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3">
-                        {slide.tag}
-                      </span>
-                      <h3 className="text-2xl font-display font-bold mb-1">
-                        {slide.title}
-                      </h3>
-                      <p className="text-sm text-white/70">
-                        {slide.description}
-                      </p>
-                    </div>
-                  </div>
+              {/* Preload only adjacent images dynamically to save bandwidth if admin adds many images */}
+              <div className="hidden">
+                {[
+                  (current - 1 + slides.length) % slides.length,
+                  (current + 1) % slides.length
+                ].map((preloadIdx) => (
+                  <Image
+                    key={`preload-dynamic-${preloadIdx}`}
+                    src={slides[preloadIdx].src}
+                    alt="preload"
+                    width={450}
+                    height={562}
+                    priority={true}
+                  />
                 ))}
               </div>
+
+              {/* Hardware-accelerated sliding track */}
+              <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                  key={current}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <Image
+                    src={slides[current].src}
+                    alt={slides[current].title}
+                    fill
+                    sizes="(max-w-[450px]) 100vw, 450px"
+                    priority={true}
+                    className="object-cover pointer-events-none"
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                  
+                  {/* Slide Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none z-10">
+                    <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3 shadow-sm">
+                      {slides[current].tag}
+                    </span>
+                    <h3 className="text-2xl font-display font-bold mb-1 shadow-sm">
+                      {slides[current].title}
+                    </h3>
+                    <p className="text-sm text-white/90 shadow-sm">
+                      {slides[current].description}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
               {/* Slider Controls */}
               <div className="absolute top-4 right-4 z-20 flex gap-2">

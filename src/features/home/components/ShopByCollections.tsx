@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Layers } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import React, { useRef } from "react";
 
 const collections = [
   {
@@ -43,6 +44,31 @@ const collections = [
 ];
 
 export const ShopByCollections = () => {
+  const isSwipingRef = useRef(false);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isSwipingRef.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartX.current);
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY.current);
+    if (deltaX > 8 || deltaY > 8) {
+      isSwipingRef.current = true;
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    if (isSwipingRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
   return (
     <section 
       className="py-10 md:py-12 relative overflow-hidden bg-[#1F1607] dark:bg-surface border-y border-bronze-500/20 dark:border-bronze-500/10"
@@ -79,20 +105,26 @@ export const ShopByCollections = () => {
         </div>
 
         {/* Categories Grid (5 columns on desktop) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div 
+          className="flex overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 pb-6 pt-2 md:pb-0 md:pt-0 scrollbar-none snap-x snap-mandatory scroll-smooth md:snap-none md:overflow-x-visible px-4 sm:px-0 -mx-4 sm:mx-0"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+        >
           {collections.map((col) => (
             <div
               key={col.id}
+              className="snap-start shrink-0 w-[140px] md:w-auto first:ml-4 sm:first:ml-0 last:mr-4 sm:last:mr-0"
             >
               <Link
                 href={`/contact?collection=${col.id}`}
-                className="group relative flex flex-col items-center p-6 bg-[#2D210B] dark:bg-surface-card border border-bronze-500/20 dark:border-bronze-500/[0.14] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-bronze-500/15 dark:hover:shadow-bronze-500/8 hover:-translate-y-1 transition-all duration-300 text-center h-full"
+                onClickCapture={handleLinkClick}
+                className="group relative flex flex-col items-center p-4 md:p-6 bg-[#2D210B] dark:bg-surface-card border border-bronze-500/20 dark:border-bronze-500/[0.14] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-bronze-500/15 dark:hover:shadow-bronze-500/8 hover:-translate-y-1 transition-all duration-300 text-center h-full"
               >
                 {/* Background colored glow */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${col.color} opacity-20 group-hover:opacity-40 transition-opacity pointer-events-none`} />
 
                 {/* Circular Image Container */}
-                <div className="relative w-28 h-28 rounded-full overflow-hidden border border-bronze-500/10 mb-6 bg-white/5 dark:bg-white/5 shadow-md">
+                <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border border-bronze-500/10 mb-4 md:mb-6 bg-white/5 dark:bg-white/5 shadow-md">
                   <Image
                     src={col.image}
                     alt={col.name}
@@ -106,7 +138,7 @@ export const ShopByCollections = () => {
                 {/* Content */}
                 <div className="relative z-10 space-y-1 flex-grow flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-[#FAF7F2] dark:text-heading group-hover:text-bronze-400 dark:group-hover:text-bronze-500 transition-colors">
+                    <h3 className="text-sm md:text-lg font-bold text-[#FAF7F2] dark:text-heading group-hover:text-bronze-400 dark:group-hover:text-bronze-500 transition-colors">
                       {col.name}
                     </h3>
                     <p className="text-xs text-[#9E948A] dark:text-muted font-medium">
@@ -114,9 +146,9 @@ export const ShopByCollections = () => {
                     </p>
                   </div>
                   
-                  <div className="pt-4 flex items-center justify-center gap-1 text-[11px] text-bronze-300 dark:text-bronze-400 font-semibold group-hover:translate-x-0.5 transition-transform">
+                  <div className="pt-3 md:pt-4 flex items-center justify-center gap-1 text-[10px] md:text-[11px] text-bronze-300 dark:text-bronze-400 font-semibold group-hover:translate-x-0.5 transition-transform">
                     <span>Explore</span>
-                    <ArrowRight size={12} />
+                    <ArrowRight size={10} className="md:w-3 md:h-3" />
                   </div>
                 </div>
               </Link>

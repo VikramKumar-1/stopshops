@@ -77,7 +77,7 @@ export const CategoryProductGrid = ({
         : "ambient-gold";
 
   return (
-    <section className={`py-10 md:py-12 relative overflow-hidden ${
+    <section className={`py-6 md:py-12 relative overflow-hidden ${
       accentColor === "rose" 
         ? "bg-premium-maroon" 
         : `section-glass-ambient ${ambientClass}`
@@ -210,7 +210,10 @@ export const CategoryProductGrid = ({
         </div>
 
         {/* Static Responsive Grid (4 Columns on Desktop, 3 Columns on Mobile showing all cards vertically) */}
-        <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
+        <div 
+          ref={scrollRef}
+          className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 pb-4 pt-2 md:pb-4 md:pt-4"
+        >
           {products.slice(0, 9).map((product, index) => (
             <div
               key={product.id}

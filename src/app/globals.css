@@ -73,13 +73,11 @@
 
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
   }
 
   body {
     background-color: var(--surface);
     color: var(--body);
-    overflow-x: hidden;
     transition: background-color 0.35s ease, color 0.35s ease;
   }
 
