@@ -10,7 +10,7 @@ const stats = [
 
 export const StatsSection = () => {
   return (
-    <section className="py-10 md:py-12 section-glass-ambient ambient-gold">
+    <section className="py-10 md:py-12 relative overflow-hidden section-glass-ambient ambient-gold">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="glass rounded-3xl p-8 sm:p-12 gradient-border">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">

@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Star, Gift, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import Image from "next/image";
+import React, { useState, useRef } from "react";
 
 const giftSets = [
   {
@@ -53,6 +54,31 @@ const giftSets = [
 
 export const GiftCollections = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const isScrollingRef = useRef(false);
+  const dragThreshold = 8;
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isScrollingRef.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartX.current);
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY.current);
+    if (deltaX > dragThreshold || deltaY > dragThreshold) {
+      isScrollingRef.current = true;
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    if (isScrollingRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -115,6 +141,8 @@ export const GiftCollections = () => {
         {/* Scrollable Product Container */}
         <div
           ref={scrollRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           className="flex overflow-x-auto gap-6 pb-8 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth"
           style={{
             scrollbarWidth: "none",
@@ -131,11 +159,13 @@ export const GiftCollections = () => {
                 <div className="absolute top-4 left-4 z-20 glass-light text-heading border border-bronze-500/10 text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-sm backdrop-blur-md">
                   {product.tag}
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-w-330px) 100vw, 330px"
+                  loading="lazy"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
@@ -170,6 +200,7 @@ export const GiftCollections = () => {
 
                   <Link
                     href="/contact"
+                    onClick={handleLinkClick}
                     className="group/btn inline-flex items-center justify-center gap-1.5 px-5 py-3 w-full rounded-full bg-gradient-to-r from-bronze-500 to-bronze-600 hover:from-bronze-400 hover:to-bronze-500 text-white font-semibold shadow-md shadow-bronze-500/10 hover:shadow-lg hover:shadow-bronze-500/25 transition-all duration-300 text-xs"
                   >
                     Request Gifting Details

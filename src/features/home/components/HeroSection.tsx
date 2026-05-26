@@ -1,6 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -188,19 +189,31 @@ export const HeroSection = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="absolute inset-0 w-full h-full"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.6}
+                  onDragEnd={(e, info) => {
+                    if (info.offset.x < -50) {
+                      handleNext();
+                    } else if (info.offset.x > 50) {
+                      handlePrev();
+                    }
+                  }}
+                  className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing touch-pan-y"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={slides[current].src}
                     alt={slides[current].title}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-w-450px) 100vw, 450px"
+                    priority
+                    className="object-cover pointer-events-none"
                   />
                   {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                   
                   {/* Slide Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none">
                     <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3">
                       {slides[current].tag}
                     </span>

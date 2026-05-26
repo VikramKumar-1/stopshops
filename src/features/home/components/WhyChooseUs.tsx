@@ -37,7 +37,7 @@ const features = [
 
 export const WhyChooseUs = () => {
   return (
-    <section className="py-10 md:py-12 section-glass-ambient ambient-bronze">
+    <section className="py-10 md:py-12 relative overflow-hidden section-glass-ambient ambient-bronze">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-bronze-500/5 rounded-full blur-[200px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

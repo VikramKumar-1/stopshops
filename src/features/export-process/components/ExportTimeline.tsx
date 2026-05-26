@@ -35,7 +35,7 @@ const steps = [
 
 export const ExportTimeline = () => {
   return (
-    <section className="py-24 relative min-h-screen">
+    <section className="py-24 relative min-h-screen overflow-hidden">
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-bronze-500/5 rounded-full blur-[160px]" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-bronze-400/5 rounded-full blur-[160px]" />
 
@@ -56,13 +56,13 @@ export const ExportTimeline = () => {
           <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-bronze-500/30 via-bronze-500/10 to-transparent hidden sm:block" />
           <div className="space-y-16">
             {steps.map((step, index) => (
-              <motion.div key={index} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15 }} className="relative flex gap-8">
+              <motion.div key={index} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15 }} className="relative flex flex-col sm:flex-row gap-6 sm:gap-8">
                 <div className="relative z-10 flex-shrink-0">
                   <div className="w-16 h-16 rounded-2xl glass gradient-border flex items-center justify-center">
                     <step.icon size={28} className="text-bronze-500 dark:text-bronze-400" />
                   </div>
                 </div>
-                <div className="glass rounded-2xl p-8 gradient-border flex-grow">
+                <div className="glass rounded-2xl p-6 sm:p-8 gradient-border flex-grow">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-xs font-mono text-bronze-600 dark:text-bronze-500 bg-bronze-500/10 px-2 py-1 rounded-md">Step {step.number}</span>
                   </div>

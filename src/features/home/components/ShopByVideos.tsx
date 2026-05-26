@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Pause, VolumeX, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 const videos = [
   {
@@ -80,6 +80,31 @@ const videos = [
 export const ShopByVideos = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [playingId, setPlayingId] = useState<number | null>(null);
+  const isScrollingRef = useRef(false);
+  const dragThreshold = 8;
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isScrollingRef.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartX.current);
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY.current);
+    if (deltaX > dragThreshold || deltaY > dragThreshold) {
+      isScrollingRef.current = true;
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    if (isScrollingRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -155,6 +180,8 @@ export const ShopByVideos = () => {
 
           <div
             ref={scrollRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             className="flex overflow-x-auto gap-6 pb-8 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth"
             style={{
               scrollbarWidth: "none",
@@ -203,6 +230,7 @@ export const ShopByVideos = () => {
 
                     <Link
                       href="/contact"
+                      onClick={handleLinkClick}
                       className="group/btn inline-flex items-center justify-center gap-1.5 px-4 py-2.5 w-full rounded-full bg-gradient-to-r from-bronze-500 to-bronze-600 hover:from-bronze-400 hover:to-bronze-500 text-white font-semibold shadow-md transition-all duration-300 text-xs"
                     >
                       Inquire Product

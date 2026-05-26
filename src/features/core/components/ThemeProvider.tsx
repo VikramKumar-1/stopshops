@@ -9,14 +9,14 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: "dark",
+  theme: "light",
   toggleTheme: () => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -26,8 +26,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       setTheme(saved);
       document.documentElement.classList.toggle("dark", saved === "dark");
     } else {
-      // Default to dark
-      document.documentElement.classList.add("dark");
+      // Default to light
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 

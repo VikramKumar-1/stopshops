@@ -25,7 +25,7 @@ const testimonials = [
 
 export const TestimonialsSection = () => {
   return (
-    <section className="py-10 md:py-12 section-glass-ambient ambient-indigo">
+    <section className="py-10 md:py-12 relative overflow-hidden section-glass-ambient ambient-indigo">
       <div className="absolute bottom-0 left-1/4 w-[600px] h-[300px] bg-bronze-500/5 rounded-full blur-[180px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

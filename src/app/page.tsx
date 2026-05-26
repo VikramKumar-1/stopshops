@@ -85,6 +85,15 @@ const kitchenwareProducts = [
     image: "/bronze-hero.png",
     rating: 4.9,
     reviews: 21
+  },
+  {
+    id: 9,
+    name: "Traditional Bronze Saucepan",
+    description: "A traditional bell metal saucepan with double rivet handle, optimized for boiling milk and making tea.",
+    specs: "Capacity: 1.5 Litres | Solid Handle",
+    image: "/bronze-lota.png",
+    rating: 4.8,
+    reviews: 14
   }
 ];
 
@@ -160,6 +169,15 @@ const tablewareProducts = [
     image: "/collection-tableware.png",
     rating: 4.7,
     reviews: 19
+  },
+  {
+    id: 9,
+    name: "Bell Metal Serving Spoon",
+    description: "Beautifully carved large serving spoon made of pure food-safe bell metal (Kansa).",
+    specs: "Length: 10 inches | Floral Engraving",
+    image: "/collection-tableware.png",
+    rating: 4.9,
+    reviews: 12
   }
 ];
 
@@ -235,6 +253,15 @@ const poojaProducts = [
     image: "/collection-pooja.png",
     rating: 4.9,
     reviews: 22
+  },
+  {
+    id: 9,
+    name: "Artisanal Incense Diffuser",
+    description: "A premium cast bronze incense burner with dome lid to evenly diffuse sacred dhoop and resin aromas.",
+    specs: "Height: 6 inches | Removable Tray",
+    image: "/collection-pooja.png",
+    rating: 5.0,
+    reviews: 17
   }
 ];
 

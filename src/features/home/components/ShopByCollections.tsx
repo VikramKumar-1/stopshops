@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Layers } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const collections = [
   {
@@ -79,13 +80,9 @@ export const ShopByCollections = () => {
 
         {/* Categories Grid (5 columns on desktop) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {collections.map((col, idx) => (
-            <motion.div
+          {collections.map((col) => (
+            <div
               key={col.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
             >
               <Link
                 href={`/contact?collection=${col.id}`}
@@ -96,11 +93,13 @@ export const ShopByCollections = () => {
 
                 {/* Circular Image Container */}
                 <div className="relative w-28 h-28 rounded-full overflow-hidden border border-bronze-500/10 mb-6 bg-white/5 dark:bg-white/5 shadow-md">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={col.image}
                     alt={col.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    fill
+                    sizes="112px"
+                    loading="lazy"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
 
@@ -121,7 +120,7 @@ export const ShopByCollections = () => {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
 

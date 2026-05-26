@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Star, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 
 interface Product {
@@ -208,28 +209,35 @@ export const CategoryProductGrid = ({
           </div>
         </div>
 
-        {/* Static Responsive Grid (4 Columns on Desktop, creating a 4x2 layout for 8 items) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.slice(0, 8).map((product) => (
+        {/* Static Responsive Grid (4 Columns on Desktop, 3 Columns on Mobile showing all cards vertically) */}
+        <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
+          {products.slice(0, 9).map((product, index) => (
             <div
               key={product.id}
-              className="flex flex-col justify-between bg-surface-card border border-bronze-500/[0.14] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-bronze-500/8 hover:-translate-y-1 transition-all duration-300"
+              className={`flex flex-col justify-between bg-surface-card border border-bronze-500/[0.14] rounded-2xl max-sm:rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-bronze-500/8 hover:-translate-y-1 transition-all duration-300 ${index === 8 ? "sm:hidden" : ""}`}
             >
               {/* Product Image */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-amber-50 dark:bg-white/5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-w-330px) 100vw, 330px"
+                  loading="lazy"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Floating Star Rating Badge (Flipkart style on mobile) */}
+                <div className="absolute bottom-1.5 left-1.5 bg-white dark:bg-zinc-900 px-1 py-0.5 rounded text-[8px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 shadow-sm border border-black/5 max-sm:flex sm:hidden">
+                  <span>{product.rating}</span>
+                  <span className="text-[7px]">★</span>
+                </div>
               </div>
 
               {/* Product Info */}
-              <div className="p-4 sm:p-5 flex-grow flex flex-col justify-between">
+              <div className="p-2 sm:p-5 flex-grow flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-1.5 mb-2 text-[10px] sm:text-[11px]">
+                  <div className="hidden sm:flex items-center gap-1.5 mb-2 text-[10px] sm:text-[11px]">
                     <div className="flex items-center text-amber-500">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} size={11} fill="currentColor" className="stroke-none" />
@@ -239,16 +247,22 @@ export const CategoryProductGrid = ({
                     <span className="text-muted">({product.reviews})</span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-heading mb-1.5 leading-snug line-clamp-1">
+                  <h3 className="text-[10px] sm:text-lg font-bold text-heading mb-1 sm:mb-1.5 leading-snug line-clamp-1">
                     {product.name}
                   </h3>
 
-                  <p className="text-xs text-body line-clamp-2 mb-4 leading-relaxed h-[36px]">
+                  {/* Pricing section (Flipkart style) */}
+                  <div className="flex items-center gap-1.5 mt-0.5 sm:mt-2">
+                    <span className="text-[10px] sm:text-sm font-bold text-heading">₹{Math.round(product.id * 100 + 299)}</span>
+                    <span className="text-[8px] sm:text-xs text-muted line-through">₹{Math.round(product.id * 150 + 499)}</span>
+                  </div>
+
+                  <p className="hidden sm:block text-xs text-body line-clamp-2 mb-4 leading-relaxed h-[36px]">
                     {product.description}
                   </p>
                 </div>
 
-                <div>
+                <div className="hidden sm:block">
                   <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-amber-700 dark:text-bronze-400 font-semibold mb-5">
                     <ShieldCheck size={12} />
                     <span className="line-clamp-1">{product.specs}</span>
@@ -277,7 +291,7 @@ export const CategoryProductGrid = ({
                 : "glass text-heading hover:bg-surface-hover border-bronze-500/20"
             } font-semibold hover:scale-105 active:scale-95 transition-all duration-300 shadow-md border`}
           >
-            Show More {title}
+            See More
             <ArrowRight size={16} />
           </Link>
         </div>
