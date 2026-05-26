@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
@@ -28,20 +28,41 @@ const slides = [
 
 export const HeroSection = () => {
   const [current, setCurrent] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const handleNext = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
+
+  // Auto-play with stable ref so it never goes stale
   useEffect(() => {
-    const timer = setInterval(() => {
+    timerRef.current = setInterval(() => {
       handleNext();
     }, 4000);
-    return () => clearInterval(timer);
-  }, [current]);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [handleNext]);
 
-  const handleNext = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX;
   };
 
-  const handlePrev = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    if (diff > 50) handleNext();
+    else if (diff < -50) handlePrev();
   };
 
   return (
@@ -122,40 +143,38 @@ export const HeroSection = () => {
           {/* Right — Bronze Product Showcase Slider */}
           <div className="relative w-full h-auto py-8 md:py-0 md:h-[550px] lg:h-[600px] flex items-center justify-center">
             {/* Main Interactive Slider */}
-            <div 
+            <div
               className="relative w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-bronze-900/20 dark:shadow-black/30 bg-black/10"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
-              {/* Hardware-accelerated sliding track */}
-              <motion.div
-                className="absolute inset-0 flex w-full h-full cursor-grab active:cursor-grabbing"
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.2}
-                onDragEnd={(e, info) => {
-                  const swipe = info.offset.x;
-                  const threshold = 50;
-                  if (swipe < -threshold) {
-                    handleNext();
-                  } else if (swipe > threshold) {
-                    handlePrev();
-                  }
+              {/* Pure CSS transform track — no Framer Motion animation conflicts */}
+              <div
+                className="absolute inset-0 flex h-full will-change-transform"
+                style={{
+                  width: `${slides.length * 100}%`,
+                  transform: `translateX(-${current * (100 / slides.length)}%)`,
+                  transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
-                animate={{ x: `-${current * 100}%` }}
-                transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
               >
                 {slides.map((slide, index) => (
-                  <div key={index} className="relative w-full h-full flex-shrink-0">
+                  <div
+                    key={index}
+                    className="relative h-full flex-shrink-0"
+                    style={{ width: `${100 / slides.length}%` }}
+                  >
                     <Image
                       src={slide.src}
                       alt={slide.title}
                       fill
-                      sizes="(max-w-[450px]) 100vw, 450px"
+                      sizes="(max-width: 450px) 100vw, 450px"
                       priority={true}
                       className="object-cover pointer-events-none"
                     />
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                    
+
                     {/* Slide Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none z-10">
                       <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3 shadow-sm">
@@ -170,7 +189,7 @@ export const HeroSection = () => {
                     </div>
                   </div>
                 ))}
-              </motion.div>
+              </div>
 
               {/* Slider Controls */}
               <div className="absolute top-4 right-4 z-20 flex gap-2">
@@ -195,9 +214,7 @@ export const HeroSection = () => {
                 {slides.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => {
-                      setCurrent(index);
-                    }}
+                    onClick={() => setCurrent(index)}
                     className={`h-2 rounded-full transition-all duration-300 ${
                       index === current ? "w-6 bg-bronze-400" : "w-2 bg-white/45"
                     }`}
@@ -207,24 +224,24 @@ export const HeroSection = () => {
               </div>
             </div>
 
-            {/* Floating badge: Orders */}
+            {/* Floating badge: Orders — smaller on mobile */}
             <motion.div
               animate={{ y: [-5, 5, -5] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute left-2 sm:-left-4 lg:-left-8 top-1/4 glass rounded-2xl px-5 py-4 shadow-2xl z-20"
+              className="absolute left-1 sm:-left-4 lg:-left-8 top-1/4 glass rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-4 shadow-2xl z-20"
             >
-              <p className="text-2xl font-display font-bold text-heading">500+</p>
-              <p className="text-xs text-muted">Orders Shipped</p>
+              <p className="text-base sm:text-2xl font-display font-bold text-heading">500+</p>
+              <p className="text-[10px] sm:text-xs text-muted">Orders Shipped</p>
             </motion.div>
 
-            {/* Floating badge: Quality */}
+            {/* Floating badge: Quality — smaller on mobile */}
             <motion.div
               animate={{ y: [5, -5, 5] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute right-2 sm:-right-4 lg:-right-6 bottom-1/4 glass rounded-2xl px-5 py-4 shadow-2xl z-20"
+              className="absolute right-1 sm:-right-4 lg:-right-6 bottom-1/4 glass rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-4 shadow-2xl z-20"
             >
-              <p className="text-2xl font-display font-bold gradient-text">100%</p>
-              <p className="text-xs text-muted">Quality Assured</p>
+              <p className="text-base sm:text-2xl font-display font-bold gradient-text">100%</p>
+              <p className="text-[10px] sm:text-xs text-muted">Quality Assured</p>
             </motion.div>
           </div>
         </div>
@@ -234,4 +251,3 @@ export const HeroSection = () => {
     </section>
   );
 };
-

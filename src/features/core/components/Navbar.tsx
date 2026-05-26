@@ -24,10 +24,8 @@ export const Navbar = () => {
     <header className="fixed w-full top-0 z-50">
       {/* Traditional Indian Pattern Announcement Bar */}
       <div 
-        className="relative w-full bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
+        className="relative h-9 w-full bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
         style={{
-          paddingTop: "env(safe-area-inset-top)",
-          height: "calc(2.25rem + env(safe-area-inset-top))",
           backgroundImage: `
             linear-gradient(rgba(26, 15, 8, 0.96), rgba(26, 15, 8, 0.96)), 
             url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='20' viewBox='0 0 60 20'%3E%3Cpath d='M0 10 C 15 0, 15 20, 30 10 C 45 0, 45 20, 60 10 L 60 20 L 0 20 Z' fill='%23cda876' fill-opacity='0.1'/%3E%3C/svg%3E")
@@ -67,12 +65,12 @@ export const Navbar = () => {
         `}</style>
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Navbar — solid bg to avoid Chrome Android backdrop-filter glitch */}
       <nav
-        className="w-full glass border-b border-border"
+        className="w-full border-b border-border bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-xl"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-16 sm:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-bronze-400 to-bronze-600 flex items-center justify-center text-white font-display font-bold text-lg shadow-lg shadow-bronze-500/20 group-hover:shadow-bronze-500/40 transition-shadow">
@@ -122,7 +120,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-border"
+            className="md:hidden border-t border-border bg-[var(--surface)]"
           >
             <div className="px-4 py-6 space-y-2">
               {navLinks.map((link) => (
