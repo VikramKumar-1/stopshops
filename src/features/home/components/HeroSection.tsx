@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
@@ -29,6 +29,8 @@ const slides = [
 export const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,6 +47,26 @@ export const HeroSection = () => {
   const handlePrev = () => {
     setDirection(-1);
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (swipeDistance > minSwipeDistance) {
+      handleNext();
+    } else if (swipeDistance < -minSwipeDistance) {
+      handlePrev();
+    }
   };
 
   // Animation variants for premium slide transition
@@ -97,48 +119,29 @@ export const HeroSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-40 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+          <div className="space-y-8 animate-none">
+            <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-xs font-medium text-amber-700 dark:text-bronze-300 tracking-wider uppercase">
                 <Sparkles size={14} className="text-bronze-500" />
                 Premium Indian Bronze Export
               </div>
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold tracking-tight leading-[1.1] text-heading"
-            >
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold tracking-tight leading-[1.1] text-heading">
               Finest Bronze
               <br />
               <span className="gradient-text">Bartan</span> to the
               <br />
               World
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-lg text-body max-w-lg leading-relaxed"
-            >
+            <p className="text-lg text-body max-w-lg leading-relaxed">
               We source, quality-check, and export traditional Indian bronze
               cookware to international markets. Premium quality. Trusted
               globally.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/contact"
                 className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-bronze-500 to-bronze-600 text-white font-semibold shadow-xl shadow-bronze-500/20 hover:shadow-bronze-500/40 hover:from-bronze-400 hover:to-bronze-500 transition-all duration-300"
@@ -152,14 +155,9 @@ export const HeroSection = () => {
               >
                 See How We Export
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="flex items-center gap-6 pt-4"
-            >
+            <div className="flex items-center gap-6 pt-4">
               <div className="flex -space-x-2">
                 {["🇺🇸", "🇬🇧", "🇦🇪", "🇩🇪"].map((flag, i) => (
                   <div
@@ -174,13 +172,18 @@ export const HeroSection = () => {
                 Trusted by buyers in{" "}
                 <span className="text-amber-700 dark:text-bronze-400 font-semibold">20+ countries</span>
               </p>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right — Bronze Product Showcase Slider */}
           <div className="relative w-full h-[550px] lg:h-[600px] flex items-center justify-center">
             {/* Main Interactive Slider */}
-            <div className="relative w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-bronze-900/20 dark:shadow-black/30 bg-black/10">
+            <div 
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              className="relative w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-bronze-900/20 dark:shadow-black/30 bg-black/10"
+            >
               <AnimatePresence initial={false} custom={direction}>
                 <motion.div
                   key={current}
@@ -189,17 +192,7 @@ export const HeroSection = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={0.6}
-                  onDragEnd={(e, info) => {
-                    if (info.offset.x < -50) {
-                      handleNext();
-                    } else if (info.offset.x > 50) {
-                      handlePrev();
-                    }
-                  }}
-                  className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing touch-pan-y"
+                  className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
                 >
                   <Image
                     src={slides[current].src}

@@ -66,10 +66,7 @@ export const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+      <nav
         className="w-full glass border-b border-border"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,7 +143,7 @@ export const Navbar = () => {
             </div>
           </motion.div>
         )}
-      </motion.nav>
+      </nav>
     </header>
   );
 };
