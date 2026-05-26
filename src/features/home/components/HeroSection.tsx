@@ -1,8 +1,8 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
@@ -28,9 +28,6 @@ const slides = [
 
 export const HeroSection = () => {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -40,59 +37,11 @@ export const HeroSection = () => {
   }, [current]);
 
   const handleNext = () => {
-    setDirection(1);
     setCurrent((prev) => (prev + 1) % slides.length);
   };
 
   const handlePrev = () => {
-    setDirection(-1);
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const swipeDistance = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 50;
-
-    if (swipeDistance > minSwipeDistance) {
-      handleNext();
-    } else if (swipeDistance < -minSwipeDistance) {
-      handlePrev();
-    }
-  };
-
-  // Animation variants for premium slide transition (optimized for hardware acceleration on mobile)
-  const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? "100%" : "-100%",
-      opacity: 0,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      transition: {
-        x: { type: "tween", ease: "easeInOut", duration: 0.25 },
-        opacity: { duration: 0.2 }
-      }
-    },
-    exit: (dir: number) => ({
-      zIndex: 0,
-      x: dir < 0 ? "100%" : "-100%",
-      opacity: 0,
-      transition: {
-        x: { type: "tween", ease: "easeInOut", duration: 0.25 },
-        opacity: { duration: 0.2 }
-      }
-    })
   };
 
   return (
@@ -174,64 +123,54 @@ export const HeroSection = () => {
           <div className="relative w-full h-auto py-8 md:py-0 md:h-[550px] lg:h-[600px] flex items-center justify-center">
             {/* Main Interactive Slider */}
             <div 
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
               className="relative w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-bronze-900/20 dark:shadow-black/30 bg-black/10"
             >
-              {/* Preload only adjacent images dynamically to save bandwidth if admin adds many images */}
-              <div className="hidden">
-                {[
-                  (current - 1 + slides.length) % slides.length,
-                  (current + 1) % slides.length
-                ].map((preloadIdx) => (
-                  <Image
-                    key={`preload-dynamic-${preloadIdx}`}
-                    src={slides[preloadIdx].src}
-                    alt="preload"
-                    width={450}
-                    height={562}
-                    priority={true}
-                  />
-                ))}
-              </div>
-
               {/* Hardware-accelerated sliding track */}
-              <AnimatePresence initial={false} custom={direction}>
-                <motion.div
-                  key={current}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="absolute inset-0 w-full h-full"
-                >
-                  <Image
-                    src={slides[current].src}
-                    alt={slides[current].title}
-                    fill
-                    sizes="(max-w-[450px]) 100vw, 450px"
-                    priority={true}
-                    className="object-cover pointer-events-none"
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                  
-                  {/* Slide Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none z-10">
-                    <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3 shadow-sm">
-                      {slides[current].tag}
-                    </span>
-                    <h3 className="text-2xl font-display font-bold mb-1 shadow-sm">
-                      {slides[current].title}
-                    </h3>
-                    <p className="text-sm text-white/90 shadow-sm">
-                      {slides[current].description}
-                    </p>
+              <motion.div
+                className="absolute inset-0 flex w-full h-full cursor-grab active:cursor-grabbing"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(e, info) => {
+                  const swipe = info.offset.x;
+                  const threshold = 50;
+                  if (swipe < -threshold) {
+                    handleNext();
+                  } else if (swipe > threshold) {
+                    handlePrev();
+                  }
+                }}
+                animate={{ x: `-${current * 100}%` }}
+                transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+              >
+                {slides.map((slide, index) => (
+                  <div key={index} className="relative w-full h-full flex-shrink-0">
+                    <Image
+                      src={slide.src}
+                      alt={slide.title}
+                      fill
+                      sizes="(max-w-[450px]) 100vw, 450px"
+                      priority={true}
+                      className="object-cover pointer-events-none"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                    
+                    {/* Slide Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none z-10">
+                      <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3 shadow-sm">
+                        {slide.tag}
+                      </span>
+                      <h3 className="text-2xl font-display font-bold mb-1 shadow-sm">
+                        {slide.title}
+                      </h3>
+                      <p className="text-sm text-white/90 shadow-sm">
+                        {slide.description}
+                      </p>
+                    </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                ))}
+              </motion.div>
 
               {/* Slider Controls */}
               <div className="absolute top-4 right-4 z-20 flex gap-2">
@@ -257,7 +196,6 @@ export const HeroSection = () => {
                   <button
                     key={index}
                     onClick={() => {
-                      setDirection(index > current ? 1 : -1);
                       setCurrent(index);
                     }}
                     className={`h-2 rounded-full transition-all duration-300 ${

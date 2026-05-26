@@ -24,8 +24,10 @@ export const Navbar = () => {
     <header className="fixed w-full top-0 z-50">
       {/* Traditional Indian Pattern Announcement Bar */}
       <div 
-        className="relative h-9 w-full bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
+        className="relative w-full bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
         style={{
+          paddingTop: "env(safe-area-inset-top)",
+          height: "calc(2.25rem + env(safe-area-inset-top))",
           backgroundImage: `
             linear-gradient(rgba(26, 15, 8, 0.96), rgba(26, 15, 8, 0.96)), 
             url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='20' viewBox='0 0 60 20'%3E%3Cpath d='M0 10 C 15 0, 15 20, 30 10 C 45 0, 45 20, 60 10 L 60 20 L 0 20 Z' fill='%23cda876' fill-opacity='0.1'/%3E%3C/svg%3E")

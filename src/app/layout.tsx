@@ -49,7 +49,9 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Navbar />
-          <main className="overflow-x-hidden w-full">{children}</main>
+          <main className="overflow-x-hidden w-full" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
