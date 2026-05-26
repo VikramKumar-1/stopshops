@@ -69,33 +69,28 @@ export const HeroSection = () => {
     }
   };
 
-  // Animation variants for premium slide transition
+  // Animation variants for premium slide transition (optimized for hardware acceleration on mobile)
   const slideVariants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? 300 : -300,
+      x: dir > 0 ? "100%" : "-100%",
       opacity: 0,
-      scale: 0.95
     }),
     center: {
       zIndex: 1,
       x: 0,
       opacity: 1,
-      scale: 1,
       transition: {
-        x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.4 },
-        scale: { duration: 0.4 }
+        x: { type: "tween", ease: "easeInOut", duration: 0.35 },
+        opacity: { duration: 0.3 }
       }
     },
     exit: (dir: number) => ({
       zIndex: 0,
-      x: dir < 0 ? 300 : -300,
+      x: dir < 0 ? "100%" : "-100%",
       opacity: 0,
-      scale: 0.95,
       transition: {
-        x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.4 },
-        scale: { duration: 0.4 }
+        x: { type: "tween", ease: "easeInOut", duration: 0.35 },
+        opacity: { duration: 0.3 }
       }
     })
   };
@@ -184,41 +179,42 @@ export const HeroSection = () => {
               onTouchEnd={handleTouchEnd}
               className="relative w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-bronze-900/20 dark:shadow-black/30 bg-black/10"
             >
-              <AnimatePresence initial={false} custom={direction}>
-                <motion.div
-                  key={current}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
-                >
-                  <Image
-                    src={slides[current].src}
-                    alt={slides[current].title}
-                    fill
-                    sizes="(max-w-450px) 100vw, 450px"
-                    priority
-                    className="object-cover pointer-events-none"
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                  
-                  {/* Slide Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none">
-                    <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3">
-                      {slides[current].tag}
-                    </span>
-                    <h3 className="text-2xl font-display font-bold mb-1">
-                      {slides[current].title}
-                    </h3>
-                    <p className="text-sm text-white/70">
-                      {slides[current].description}
-                    </p>
+              {/* Hardware-accelerated sliding track */}
+              <div 
+                className="flex h-full transition-transform duration-500 ease-out"
+                style={{
+                  width: `${slides.length * 100}%`,
+                  transform: `translateX(-${(current * 100) / slides.length}%)`
+                }}
+              >
+                {slides.map((slide, index) => (
+                  <div key={index} className="relative w-full h-full flex-shrink-0">
+                    <Image
+                      src={slide.src}
+                      alt={slide.title}
+                      fill
+                      sizes="(max-w-450px) 100vw, 450px"
+                      priority={index === 0}
+                      className="object-cover pointer-events-none"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                    
+                    {/* Slide Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white pointer-events-none select-none">
+                      <span className="inline-block px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-bronze-500/80 text-white mb-3">
+                        {slide.tag}
+                      </span>
+                      <h3 className="text-2xl font-display font-bold mb-1">
+                        {slide.title}
+                      </h3>
+                      <p className="text-sm text-white/70">
+                        {slide.description}
+                      </p>
+                    </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                ))}
+              </div>
 
               {/* Slider Controls */}
               <div className="absolute top-4 right-4 z-20 flex gap-2">
