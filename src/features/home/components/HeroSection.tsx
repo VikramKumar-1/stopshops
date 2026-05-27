@@ -81,7 +81,7 @@ export const HeroSection = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-36 pb-12 md:pt-44 md:pb-20 lg:pt-10 xl:pt-12 xl:pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-30 pb-12 md:pt-44 md:pb-20 lg:pt-10 xl:pt-12 xl:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-none">

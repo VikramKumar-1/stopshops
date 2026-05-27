@@ -112,7 +112,7 @@ export const CategoryStrip = () => {
   }, []);
 
   return (
-    <div className={`z-40 w-full border-t border-b border-orange-500/30 dark:border-orange-500/40 bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "fixed top-[100px] md:top-[132px] lg:sticky lg:top-[132px]"}`}>
+    <div className={`z-40 w-full border-t border-b border-orange-500/30 dark:border-orange-500/40 bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "fixed top-[88px] md:top-[132px] lg:sticky lg:top-[132px]"}`}>
       <div className="max-w-7xl mx-auto relative px-4 sm:px-6 lg:px-8">
         
         {/* Left Scroll Fade Indicator (only visible on mobile overflow) */}
@@ -121,7 +121,7 @@ export const CategoryStrip = () => {
         {/* Right Scroll Fade Indicator (only visible on mobile overflow) */}
         <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[var(--surface)] to-transparent pointer-events-none z-10 md:hidden" />
 
-        <div className="flex items-center justify-between py-2 w-full gap-1 transition-all duration-300">
+        <div className="flex items-center justify-between py-1.5 sm:py-2 w-full gap-1 transition-all duration-300">
           {/* Left: Logo (scrollingDown only) */}
           <div className={`flex items-center justify-start shrink-0 transition-all duration-300 ${scrollingDown ? "min-w-[140px] sm:min-w-[160px] border-r border-orange-500/30 dark:border-orange-500/40 pr-3 mr-1.5 sm:pr-4 sm:mr-2" : "w-0 overflow-hidden"}`}>
             {scrollingDown && (

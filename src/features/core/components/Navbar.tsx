@@ -40,7 +40,7 @@ export const Navbar = () => {
     <>
       {/* Traditional Indian Pattern Announcement Bar */}
       <div 
-        className="fixed top-0 left-0 right-0 h-9 z-50 bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
+        className="fixed top-0 left-0 right-0 h-8 z-50 bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
         style={{
           backgroundImage: `
             linear-gradient(rgba(26, 15, 8, 0.96), rgba(26, 15, 8, 0.96)), 
@@ -82,18 +82,18 @@ export const Navbar = () => {
       </div>
 
       <nav
-        className={`fixed top-9 left-0 right-0 z-40 w-full border-b border-orange-500/30 dark:border-orange-500/40 bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-xl transition-transform duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}
+        className={`fixed top-8 md:top-9 left-0 right-0 z-40 w-full border-b border-orange-500/30 dark:border-orange-500/40 bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-xl transition-transform duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 md:h-24">
+          <div className="flex justify-between items-center h-14 md:h-24">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-2 group">
               <img 
                 src="/logo.jpeg" 
                 alt="StopShop Logo" 
-                className="w-10 h-10 md:w-16 md:h-16 rounded-xl object-cover shadow-md border border-border group-hover:border-bronze-500/30 transition-all duration-200"
+                className="w-8 h-8 md:w-16 md:h-16 rounded-lg object-cover shadow-md border border-border group-hover:border-bronze-500/30 transition-all duration-200"
               />
-              <span className="text-xl md:text-3xl font-display font-bold tracking-tight text-heading">
+              <span className="text-lg md:text-3xl font-display font-bold tracking-tight text-heading">
                 Stop<span className="gradient-text">Shop</span>
               </span>
             </Link>
