@@ -112,7 +112,7 @@ export const CategoryStrip = () => {
   }, []);
 
   return (
-    <div className={`z-40 w-full border-t border-b border-orange-500/30 dark:border-orange-500/40 bg-gradient-to-r from-[#ffd8b8]/90 via-[#ffe5cc]/95 to-[#ffd8b8]/90 dark:from-[#2e1305]/95 dark:via-[#1e0a02]/95 dark:to-[#2e1305]/95 supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "relative lg:sticky lg:top-[132px]"}`}>
+    <div className={`z-40 w-full border-b border-orange-500/30 dark:border-orange-500/40 bg-gradient-to-r from-[#ffd8b8]/90 via-[#ffe5cc]/95 to-[#ffd8b8]/90 dark:from-[#2e1305]/95 dark:via-[#1e0a02]/95 dark:to-[#2e1305]/95 md:bg-[var(--surface)] md:bg-none md:supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "border-t border-t-orange-500/30 dark:border-t-orange-500/40 relative lg:sticky lg:top-[132px]"}`}>
       <div className="max-w-7xl mx-auto relative px-4 sm:px-6 lg:px-8">
         
         {/* Left Scroll Fade Indicator (only visible on mobile overflow) */}
@@ -123,7 +123,7 @@ export const CategoryStrip = () => {
 
         <div className="flex items-center justify-between py-1 sm:py-2 w-full gap-1 transition-all duration-300">
           {/* Left: Logo (scrollingDown only) */}
-          <div className={`flex items-center justify-start shrink-0 transition-all duration-300 ${scrollingDown ? "min-w-[140px] sm:min-w-[160px] border-r border-orange-500/30 dark:border-orange-500/40 pr-3 mr-1.5 sm:pr-4 sm:mr-2" : "w-0 overflow-hidden"}`}>
+          <div className={`flex items-center justify-start shrink-0 transition-all duration-300 ${scrollingDown ? "min-w-[140px] sm:min-w-[160px] pr-3 mr-1.5 sm:pr-4 sm:mr-2" : "w-0 overflow-hidden"}`}>
             {scrollingDown && (
               <Link href="/" className="flex items-center gap-2 transition-all duration-300">
                 <img 
@@ -172,7 +172,7 @@ export const CategoryStrip = () => {
           </div>
 
           {/* Right: ThemeToggle & Contact Us (scrollingDown only) */}
-          <div className={`flex items-center justify-end gap-1.5 sm:gap-3 shrink-0 transition-all duration-300 ${scrollingDown ? "min-w-[140px] sm:min-w-[160px] border-l border-orange-500/30 dark:border-orange-500/40 pl-3 ml-1.5 sm:pl-4 sm:ml-2" : "w-0 overflow-hidden"}`}>
+          <div className={`flex items-center justify-end gap-1.5 sm:gap-3 shrink-0 transition-all duration-300 ${scrollingDown ? "min-w-[140px] sm:min-w-[160px] pl-3 ml-1.5 sm:pl-4 sm:ml-2" : "w-0 overflow-hidden"}`}>
             {scrollingDown && (
               <>
                 <ThemeToggle />

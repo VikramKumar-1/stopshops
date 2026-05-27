@@ -136,7 +136,7 @@ export const FeaturedProducts = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-12 gap-6">
           <div className="max-w-xl">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -154,7 +154,7 @@ export const FeaturedProducts = () => {
           </div>
 
           {/* Navigation controls (Arrows) */}
-          <div className="flex gap-3">
+          <div className="hidden md:flex gap-3">
             <button
               onClick={() => scroll("left")}
               className="w-12 h-12 rounded-full flex items-center justify-center border border-bronze-500/20 bg-surface-card hover:bg-surface-hover text-heading shadow-md hover:shadow-lg transition-all active:scale-95"

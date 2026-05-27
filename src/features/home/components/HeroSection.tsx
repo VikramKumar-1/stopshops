@@ -192,7 +192,7 @@ export const HeroSection = () => {
               </div>
 
               {/* Slider Controls */}
-              <div className="absolute top-4 right-4 z-20 flex gap-2">
+              <div className="absolute top-4 right-4 z-20 hidden md:flex gap-2">
                 <button
                   onClick={handlePrev}
                   className="w-10 h-10 rounded-full flex items-center justify-center glass-light hover:bg-white/20 text-white transition-all active:scale-95"
