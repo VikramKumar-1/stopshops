@@ -112,7 +112,7 @@ export const CategoryStrip = () => {
   }, []);
 
   return (
-    <div className={`z-40 w-full border-t border-b border-orange-500/30 dark:border-orange-500/40 bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "fixed top-[88px] md:top-[132px] lg:sticky lg:top-[132px]"}`}>
+    <div className={`z-40 w-full border-t border-b border-orange-500/30 dark:border-orange-500/40 bg-gradient-to-r from-[#ffd8b8]/90 via-[#ffe5cc]/95 to-[#ffd8b8]/90 dark:from-[#2e1305]/95 dark:via-[#1e0a02]/95 dark:to-[#2e1305]/95 supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "fixed top-[88px] md:top-[132px] lg:sticky lg:top-[132px]"}`}>
       <div className="max-w-7xl mx-auto relative px-4 sm:px-6 lg:px-8">
         
         {/* Left Scroll Fade Indicator (only visible on mobile overflow) */}
@@ -121,7 +121,7 @@ export const CategoryStrip = () => {
         {/* Right Scroll Fade Indicator (only visible on mobile overflow) */}
         <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[var(--surface)] to-transparent pointer-events-none z-10 md:hidden" />
 
-        <div className="flex items-center justify-between py-1.5 sm:py-2 w-full gap-1 transition-all duration-300">
+        <div className="flex items-center justify-between py-1 sm:py-2 w-full gap-1 transition-all duration-300">
           {/* Left: Logo (scrollingDown only) */}
           <div className={`flex items-center justify-start shrink-0 transition-all duration-300 ${scrollingDown ? "min-w-[140px] sm:min-w-[160px] border-r border-orange-500/30 dark:border-orange-500/40 pr-3 mr-1.5 sm:pr-4 sm:mr-2" : "w-0 overflow-hidden"}`}>
             {scrollingDown && (
@@ -146,12 +146,12 @@ export const CategoryStrip = () => {
                 <Link
                   key={cat.id}
                   href={cat.href}
-                  className="group flex flex-col items-center gap-1.5 shrink-0 transition-all duration-300 w-[64px] sm:w-[92px] text-center"
+                  className="group flex flex-col items-center gap-1 shrink-0 transition-all duration-300 w-[58px] sm:w-[92px] text-center"
                 >
-                  {/* Comfortable rounded tile on mobile */}
-                  <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 shadow-sm group-hover:shadow-md ${cat.bgColor} ${cat.borderColor} ${cat.shadowColor}`}>
+                  {/* Slimmer rounded tile on mobile */}
+                  <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center border transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 shadow-sm group-hover:shadow-md ${cat.bgColor} ${cat.borderColor} ${cat.shadowColor}`}>
                     <Icon
-                      size={15}
+                      size={14}
                       strokeWidth={1.8}
                       className={`${cat.iconColor} sm:hidden transition-transform duration-300 group-hover:scale-110`}
                     />
@@ -163,7 +163,7 @@ export const CategoryStrip = () => {
                   </div>
 
                   {/* Clean readable labels */}
-                  <span className="text-[9px] sm:text-[10px] font-semibold text-muted group-hover:text-heading whitespace-nowrap transition-colors duration-300 tracking-wide block w-full truncate">
+                  <span className="text-[8px] sm:text-[10px] font-semibold text-muted group-hover:text-heading whitespace-nowrap transition-colors duration-300 tracking-wide block w-full truncate">
                     {cat.name}
                   </span>
                 </Link>
