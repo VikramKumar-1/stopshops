@@ -121,7 +121,7 @@ export const CategoryStrip = () => {
         {/* Right Scroll Fade Indicator (only visible on mobile overflow) */}
         <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[var(--surface)] to-transparent pointer-events-none z-10 md:hidden" />
 
-        <div className="flex items-center justify-between py-1.5 sm:py-2 w-full gap-1 transition-all duration-300">
+        <div className="flex items-center justify-between py-2 w-full gap-1 transition-all duration-300">
           {/* Left: Logo (scrollingDown only) */}
           <div className={`flex items-center justify-start shrink-0 transition-all duration-300 ${scrollingDown ? "min-w-[140px] sm:min-w-[160px] border-r border-orange-500/30 dark:border-orange-500/40 pr-3 mr-1.5 sm:pr-4 sm:mr-2" : "w-0 overflow-hidden"}`}>
             {scrollingDown && (
@@ -139,19 +139,19 @@ export const CategoryStrip = () => {
           </div>
 
           {/* Center: Category Scroll Container */}
-          <div className={`flex overflow-x-auto scrollbar-none items-center gap-2 sm:gap-6 flex-grow transition-all duration-300 ${scrollingDown ? "justify-start md:justify-center" : "justify-start md:justify-evenly"}`}>
+          <div className={`flex overflow-x-auto scrollbar-none items-center gap-3 sm:gap-6 flex-grow transition-all duration-300 ${scrollingDown ? "justify-start md:justify-center" : "justify-start md:justify-evenly"}`}>
             {categories.map((cat) => {
               const Icon = cat.icon;
               return (
                 <Link
                   key={cat.id}
                   href={cat.href}
-                  className="group flex flex-col items-center gap-0.5 sm:gap-1 shrink-0 transition-all duration-300 w-[52px] sm:w-[92px] text-center"
+                  className="group flex flex-col items-center gap-1.5 shrink-0 transition-all duration-300 w-[64px] sm:w-[92px] text-center"
                 >
-                  {/* Ultra-compact rounded tile on mobile */}
-                  <div className={`w-7.5 h-7.5 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center border transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 shadow-sm group-hover:shadow-md ${cat.bgColor} ${cat.borderColor} ${cat.shadowColor}`}>
+                  {/* Comfortable rounded tile on mobile */}
+                  <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 shadow-sm group-hover:shadow-md ${cat.bgColor} ${cat.borderColor} ${cat.shadowColor}`}>
                     <Icon
-                      size={13}
+                      size={15}
                       strokeWidth={1.8}
                       className={`${cat.iconColor} sm:hidden transition-transform duration-300 group-hover:scale-110`}
                     />
@@ -162,8 +162,8 @@ export const CategoryStrip = () => {
                     />
                   </div>
 
-                  {/* Ultra-compact labels */}
-                  <span className="text-[7.5px] sm:text-[10px] font-semibold text-muted group-hover:text-heading whitespace-nowrap transition-colors duration-300 tracking-wide block w-full truncate">
+                  {/* Clean readable labels */}
+                  <span className="text-[9px] sm:text-[10px] font-semibold text-muted group-hover:text-heading whitespace-nowrap transition-colors duration-300 tracking-wide block w-full truncate">
                     {cat.name}
                   </span>
                 </Link>
