@@ -112,7 +112,7 @@ export const CategoryStrip = () => {
   }, []);
 
   return (
-    <div className={`z-40 w-full border-t border-b border-orange-500/30 dark:border-orange-500/40 bg-gradient-to-r from-[#ffd8b8]/90 via-[#ffe5cc]/95 to-[#ffd8b8]/90 dark:from-[#2e1305]/95 dark:via-[#1e0a02]/95 dark:to-[#2e1305]/95 supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "fixed top-[88px] md:top-[132px] lg:sticky lg:top-[132px]"}`}>
+    <div className={`z-40 w-full border-t border-b border-orange-500/30 dark:border-orange-500/40 bg-gradient-to-r from-[#ffd8b8]/90 via-[#ffe5cc]/95 to-[#ffd8b8]/90 dark:from-[#2e1305]/95 dark:via-[#1e0a02]/95 dark:to-[#2e1305]/95 supports-[backdrop-filter]:backdrop-blur-md shadow-sm lg:transition-[top] lg:duration-300 lg:mt-[132px] ${scrollingDown ? "lg:sticky lg:top-[36px]" : "relative lg:sticky lg:top-[132px]"}`}>
       <div className="max-w-7xl mx-auto relative px-4 sm:px-6 lg:px-8">
         
         {/* Left Scroll Fade Indicator (only visible on mobile overflow) */}

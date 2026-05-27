@@ -49,8 +49,10 @@ export default function RootLayout({
         className={`${inter.variable} ${outfit.variable} font-sans bg-surface text-body antialiased`}
       >
         <ThemeProvider>
-          <Navbar />
-          <CategoryStrip />
+          <div className="fixed top-0 left-0 right-0 z-40 w-full lg:contents">
+            <Navbar />
+            <CategoryStrip />
+          </div>
           <main className="overflow-x-hidden w-full">{children}</main>
           <Footer />
         </ThemeProvider>
