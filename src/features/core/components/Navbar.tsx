@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
@@ -13,6 +13,22 @@ const navLinks = [
 
 export const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth <= 1024) return;
+      const currentScrollY = window.scrollY;
+      
+      // Show navbar only when at the very top (scrolled less than 20px)
+      const isVisible = currentScrollY < 20;
+      setVisible(isVisible);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const marqueeItems = [
     "CASH ON DELIVERY AVAILABLE",
@@ -21,14 +37,14 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="fixed w-full top-0 z-50">
+    <>
       {/* Traditional Indian Pattern Announcement Bar */}
       <div 
-        className="relative h-9 w-full bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
+        className="fixed top-0 left-0 right-0 h-9 z-50 bg-gradient-to-r from-bronze-950 via-bronze-900 to-bronze-950 border-b border-bronze-800/40 flex items-center overflow-hidden"
         style={{
           backgroundImage: `
             linear-gradient(rgba(26, 15, 8, 0.96), rgba(26, 15, 8, 0.96)), 
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='20' viewBox='0 0 60 20'%3E%3Cpath d='M0 10 C 15 0, 15 20, 30 10 C 45 0, 45 20, 60 10 L 60 20 L 0 20 Z' fill='%23cda876' fill-opacity='0.1'/%3E%3C/svg%3E")
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='20' viewBox='0 0 60 20'%3E%3Cpath d='M0 10 C 15 0, 15 20, 30 10 C 45 0, 45 20, 60 10 L 60 20 L 0 20 Z' fill='%23fb923c' fill-opacity='0.1'/%3E%3C/svg%3E")
           `,
           backgroundSize: "auto, 60px 20px"
         }}
@@ -65,19 +81,20 @@ export const Navbar = () => {
         `}</style>
       </div>
 
-      {/* Main Navbar — solid bg to avoid Chrome Android backdrop-filter glitch */}
       <nav
-        className="w-full border-b border-border bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-xl"
+        className={`fixed top-9 left-0 right-0 z-40 w-full border-b border-orange-500/30 dark:border-orange-500/40 bg-[var(--surface)] supports-[backdrop-filter]:bg-[var(--glass-bg)] supports-[backdrop-filter]:backdrop-blur-xl transition-transform duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-20">
+          <div className="flex justify-between items-center h-16 md:h-24">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-bronze-400 to-bronze-600 flex items-center justify-center text-white font-display font-bold text-lg shadow-lg shadow-bronze-500/20 group-hover:shadow-bronze-500/40 transition-shadow">
-                S
-              </div>
-              <span className="text-xl font-display font-bold tracking-tight text-heading">
-                Stop<span className="gradient-text">Shops</span>
+            <Link href="/" className="flex items-center gap-3 group">
+              <img 
+                src="/logo.jpeg" 
+                alt="StopShop Logo" 
+                className="w-10 h-10 md:w-16 md:h-16 rounded-xl object-cover shadow-md border border-border group-hover:border-bronze-500/30 transition-all duration-200"
+              />
+              <span className="text-xl md:text-3xl font-display font-bold tracking-tight text-heading">
+                Stop<span className="gradient-text">Shop</span>
               </span>
             </Link>
 
@@ -108,7 +125,7 @@ export const Navbar = () => {
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className="p-2 text-muted hover:text-heading"
               >
-                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
           </div>
@@ -144,6 +161,6 @@ export const Navbar = () => {
           </motion.div>
         )}
       </nav>
-    </header>
+    </>
   );
 };

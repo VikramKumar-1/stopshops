@@ -41,7 +41,7 @@ export const ExportTimeline = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20 space-y-4">
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-sm uppercase tracking-[0.2em] text-amber-600 dark:text-bronze-400 font-medium">
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-sm uppercase tracking-[0.2em] text-orange-600 dark:text-bronze-400 font-medium">
             Our Export Pipeline
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl sm:text-6xl font-display font-bold text-heading">

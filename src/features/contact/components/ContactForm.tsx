@@ -9,7 +9,7 @@ export const ContactForm = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 space-y-4">
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-sm uppercase tracking-[0.2em] text-amber-600 dark:text-bronze-400 font-medium">
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-sm uppercase tracking-[0.2em] text-orange-600 dark:text-bronze-400 font-medium">
             Get in Touch
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl sm:text-6xl font-display font-bold text-heading">
@@ -23,7 +23,7 @@ export const ContactForm = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-2 space-y-6">
             {[
-              { icon: Mail, label: "Email Us", value: "export@stopshops.com" },
+              { icon: Mail, label: "Email Us", value: "export@stopshop.com" },
               { icon: Phone, label: "Call Us", value: "+91 98765 43210" },
               { icon: MapPin, label: "Headquarters", value: "Moradabad, Uttar Pradesh, India" },
             ].map((item, index) => (

@@ -10,7 +10,7 @@ const newProducts = [
     id: 1,
     name: "Pure Kansa Tumbler Set",
     tag: "New Launch",
-    tagColor: "from-rose-500 to-amber-500",
+    tagColor: "from-rose-500 to-orange-500",
     description: "Set of 6 premium handcrafted bell metal (Kansa) water glasses with an exquisite mirror-finish polish.",
     specs: "Set of 6 | 320ml | Mirror Finish",
     image: "/bronze-lota.png",
@@ -43,7 +43,7 @@ const newProducts = [
     id: 4,
     name: "Royal Bronze Jug",
     tag: "New Launch",
-    tagColor: "from-amber-600 to-red-500",
+    tagColor: "from-orange-600 to-red-500",
     description: "Traditional wellness water jug handcrafted from pure bronze to boost digestion and purify your daily drinking water.",
     specs: "Capacity: 2 Litres | 100% Lead-Free",
     image: "/bronze-lota.png",
@@ -102,13 +102,13 @@ export const NewLaunchProducts = () => {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-xs font-semibold text-amber-200 border border-amber-500/20 tracking-wider uppercase mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-xs font-semibold text-orange-200 border border-orange-500/20 tracking-wider uppercase mb-4"
             >
-              <Sparkles size={14} className="text-amber-400" />
+              <Sparkles size={14} className="text-orange-400" />
               Latest Arrivals
             </motion.div>
             
-            <h2 className="text-4xl sm:text-5xl font-display font-bold text-amber-100">
+            <h2 className="text-4xl sm:text-5xl font-display font-bold text-orange-100">
               New <span className="gradient-text">Launch Products</span>
             </h2>
           </div>
@@ -117,14 +117,14 @@ export const NewLaunchProducts = () => {
           <div className="flex gap-3">
             <button
               onClick={() => scroll("left")}
-              className="w-12 h-12 rounded-full flex items-center justify-center border border-amber-500/20 bg-white/5 hover:bg-white/10 text-amber-100 shadow-md hover:shadow-lg transition-all active:scale-95"
+              className="w-12 h-12 rounded-full flex items-center justify-center border border-orange-500/20 bg-white/5 hover:bg-white/10 text-orange-100 shadow-md hover:shadow-lg transition-all active:scale-95"
               aria-label="Scroll left"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="w-12 h-12 rounded-full flex items-center justify-center border border-amber-500/20 bg-white/5 hover:bg-white/10 text-amber-100 shadow-md hover:shadow-lg transition-all active:scale-95"
+              className="w-12 h-12 rounded-full flex items-center justify-center border border-orange-500/20 bg-white/5 hover:bg-white/10 text-orange-100 shadow-md hover:shadow-lg transition-all active:scale-95"
               aria-label="Scroll right"
             >
               <ChevronRight size={20} />
@@ -149,7 +149,7 @@ export const NewLaunchProducts = () => {
               className="snap-start snap-always shrink-0 w-[290px] sm:w-[330px] flex flex-col justify-between bg-surface-card border border-bronze-500/[0.14] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-bronze-500/8 hover:-translate-y-1 transition-all duration-300"
             >
               {/* Product Image */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-amber-50 dark:bg-white/5">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-orange-50 dark:bg-white/5">
                 <div className={`absolute top-4 left-4 z-20 bg-gradient-to-r ${product.tagColor} text-white text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-lg`}>
                   {product.tag}
                 </div>
@@ -168,7 +168,7 @@ export const NewLaunchProducts = () => {
               <div className="p-5 flex-grow flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-1.5 mb-2.5 text-[11px]">
-                    <div className="flex items-center text-amber-500">
+                    <div className="flex items-center text-orange-500">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} size={11} fill="currentColor" className="stroke-none" />
                       ))}
@@ -187,7 +187,7 @@ export const NewLaunchProducts = () => {
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-1.5 text-[11px] text-amber-700 dark:text-bronze-400 font-semibold mb-5">
+                  <div className="flex items-center gap-1.5 text-[11px] text-orange-700 dark:text-bronze-400 font-semibold mb-5">
                     <ShieldCheck size={13} />
                     <span className="line-clamp-1">{product.specs}</span>
                   </div>

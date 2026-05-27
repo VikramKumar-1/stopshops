@@ -46,9 +46,9 @@ export const WhyChooseUs = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-sm uppercase tracking-[0.2em] text-amber-600 dark:text-bronze-400 font-medium"
+            className="text-sm uppercase tracking-[0.2em] text-orange-600 dark:text-bronze-400 font-medium"
           >
-            Why StopShops
+            Why StopShop
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

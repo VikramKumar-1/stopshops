@@ -10,7 +10,7 @@ const giftSets = [
     id: 1,
     name: "Imperial Dining Set (12-Piece)",
     tag: "Royal Luxury",
-    tagColor: "from-amber-600 to-rose-600",
+    tagColor: "from-orange-600 to-rose-600",
     description: "A complete dining set including thalis, katoris, tumblers, and spoons. Crafted in pure Bell Metal (Kansa) and packaged in a luxury wooden chest.",
     specs: "12 Items | Handcrafted Wood Box",
     image: "/bronze-hero.png",
@@ -21,7 +21,7 @@ const giftSets = [
     id: 2,
     name: "Ayurveda Wellness Gift Box",
     tag: "Wellness Curated",
-    tagColor: "from-teal-600 to-amber-600",
+    tagColor: "from-teal-600 to-orange-600",
     description: "The ultimate wellness gift containing a handcrafted water lota, two healing cups, and pure bronze stirring spoons. Curated for health-conscious living.",
     specs: "5 Items | Eco-friendly Hard Box",
     image: "/bronze-lota.png",
@@ -96,7 +96,7 @@ export const GiftCollections = () => {
       {/* Background patterns */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/5 rounded-full blur-[120px]" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -108,7 +108,7 @@ export const GiftCollections = () => {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-xs font-semibold text-amber-700 dark:text-bronze-300 tracking-wider uppercase mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-xs font-semibold text-orange-700 dark:text-bronze-300 tracking-wider uppercase mb-4"
             >
               <Gift size={14} className="text-bronze-500" />
               Curated For Gifting
@@ -155,7 +155,7 @@ export const GiftCollections = () => {
               className="snap-start snap-always shrink-0 w-[290px] sm:w-[330px] flex flex-col justify-between bg-surface-card border border-bronze-500/[0.14] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-bronze-500/8 hover:-translate-y-1 transition-all duration-300"
             >
               {/* Product Image */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-amber-50 dark:bg-white/5">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-orange-50 dark:bg-white/5">
                 <div className="absolute top-4 left-4 z-20 glass-light text-heading border border-bronze-500/10 text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-sm backdrop-blur-md">
                   {product.tag}
                 </div>
@@ -174,7 +174,7 @@ export const GiftCollections = () => {
               <div className="p-5 flex-grow flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-1.5 mb-2.5 text-[11px]">
-                    <div className="flex items-center text-amber-500">
+                    <div className="flex items-center text-orange-500">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} size={11} fill="currentColor" className="stroke-none" />
                       ))}
@@ -193,7 +193,7 @@ export const GiftCollections = () => {
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-1.5 text-[11px] text-amber-700 dark:text-bronze-400 font-semibold mb-5">
+                  <div className="flex items-center gap-1.5 text-[11px] text-orange-700 dark:text-bronze-400 font-semibold mb-5">
                     <ShieldCheck size={13} />
                     <span className="line-clamp-1">{product.specs}</span>
                   </div>

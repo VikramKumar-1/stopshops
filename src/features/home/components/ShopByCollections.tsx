@@ -11,7 +11,7 @@ const collections = [
     name: "Tableware",
     itemsCount: "18 Products",
     image: "/collection-tableware.png",
-    color: "from-amber-500/10 to-bronze-500/10"
+    color: "from-orange-500/10 to-bronze-500/10"
   },
   {
     id: "pooja-item",
@@ -74,9 +74,9 @@ export const ShopByCollections = () => {
       className="py-10 md:py-12 relative overflow-hidden bg-[#1F1607] dark:bg-surface border-y border-bronze-500/20 dark:border-bronze-500/10"
       style={{
         backgroundImage: `
-          radial-gradient(circle at 10% 20%, rgba(217, 119, 6, 0.15) 0%, transparent 40%),
-          radial-gradient(circle at 90% 80%, rgba(217, 119, 6, 0.15) 0%, transparent 40%),
-          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0 L40 80 M0 40 L80 40 M20 20 L60 60 M20 60 L60 20' stroke='%23cda876' stroke-width='0.5' stroke-opacity='0.08'/%3E%3Ccircle cx='40' cy='40' r='10' fill='none' stroke='%23cda876' stroke-width='0.5' stroke-opacity='0.12'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='%23cda876' stroke-width='0.5' stroke-opacity='0.08' stroke-dasharray='2,2'/%3E%3Ccircle cx='40' cy='40' r='30' fill='none' stroke='%23cda876' stroke-width='0.5' stroke-opacity='0.06'/%3E%3Cpath d='M40 10 Q45 20 40 30 Q35 20 40 10 M40 50 Q45 60 40 70 Q35 60 40 50 M10 40 Q20 45 30 40 Q20 35 10 40 M50 40 Q60 45 70 40 Q60 35 50 40' fill='none' stroke='%23cda876' stroke-width='0.5' stroke-opacity='0.12'/%3E%3C/svg%3E")
+          radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0 L40 80 M0 40 L80 40 M20 20 L60 60 M20 60 L60 20' stroke='%23fb923c' stroke-width='0.5' stroke-opacity='0.08'/%3E%3Ccircle cx='40' cy='40' r='10' fill='none' stroke='%23fb923c' stroke-width='0.5' stroke-opacity='0.12'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='%23fb923c' stroke-width='0.5' stroke-opacity='0.08' stroke-dasharray='2,2'/%3E%3Ccircle cx='40' cy='40' r='30' fill='none' stroke='%23fb923c' stroke-width='0.5' stroke-opacity='0.06'/%3E%3Cpath d='M40 10 Q45 20 40 30 Q35 20 40 10 M40 50 Q45 60 40 70 Q35 60 40 50 M10 40 Q20 45 30 40 Q20 35 10 40 M50 40 Q60 45 70 40 Q60 35 50 40' fill='none' stroke='%23fb923c' stroke-width='0.5' stroke-opacity='0.12'/%3E%3C/svg%3E")
         `,
         backgroundSize: "100% 100%, 100% 100%, 80px 80px"
       }}

@@ -39,9 +39,9 @@ export const CategoryProductGrid = ({
       const rest = words.slice(1).join(" ");
       let accentTextClass = "";
       if (accentColor === "emerald" || accentColor === "bronze") {
-        accentTextClass = "bg-gradient-to-r from-bronze-600 via-bronze-500 to-amber-600 bg-clip-text text-transparent dark:from-bronze-400 dark:via-bronze-300 dark:to-amber-400";
+        accentTextClass = "bg-gradient-to-r from-bronze-600 via-bronze-500 to-orange-600 bg-clip-text text-transparent dark:from-bronze-400 dark:via-bronze-300 dark:to-orange-400";
       } else if (accentColor === "rose") {
-        accentTextClass = "bg-gradient-to-r from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent";
+        accentTextClass = "bg-gradient-to-r from-rose-400 via-pink-400 to-orange-300 bg-clip-text text-transparent";
       } else {
         accentTextClass = "gradient-text";
       }
@@ -49,7 +49,7 @@ export const CategoryProductGrid = ({
       return (
         <>
           <span className={accentTextClass}>{firstWord}</span>{" "}
-          <span className={accentColor === "rose" ? "text-amber-100" : "text-heading"}>
+          <span className={accentColor === "rose" ? "text-orange-100" : "text-heading"}>
             {rest}
           </span>
         </>
@@ -86,7 +86,7 @@ export const CategoryProductGrid = ({
       {accentColor === "rose" && (
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] h-[250px] pointer-events-none z-0 overflow-hidden select-none opacity-90">
           <svg 
-            className="w-full h-full text-amber-500/80" 
+            className="w-full h-full text-orange-500/80" 
             viewBox="0 0 400 200" 
             fill="none" 
             stroke="currentColor" 
@@ -191,18 +191,18 @@ export const CategoryProductGrid = ({
               viewport={{ once: true }}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${
                 accentColor === "rose" 
-                  ? "bg-white/10 text-amber-200 border border-amber-500/20" 
-                  : "glass-light text-amber-700 dark:text-bronze-300"
+                  ? "bg-white/10 text-orange-200 border border-orange-500/20" 
+                  : "glass-light text-orange-700 dark:text-bronze-300"
               } text-xs font-semibold tracking-wider uppercase mb-4`}
             >
               <span className={`w-1.5 h-1.5 rounded-full ${
-                accentColor === "rose" ? "bg-amber-400" : accentColor === "emerald" ? "bg-emerald-500" : "bg-bronze-500"
+                accentColor === "rose" ? "bg-orange-400" : accentColor === "emerald" ? "bg-emerald-500" : "bg-bronze-500"
               }`} />
               {tagLine}
             </motion.div>
             
             <h2 className={`text-4xl sm:text-5xl font-display font-bold ${
-              accentColor === "rose" ? "text-amber-100" : "text-heading"
+              accentColor === "rose" ? "text-orange-100" : "text-heading"
             }`}>
               {renderTitle(title)}
             </h2>
@@ -220,7 +220,7 @@ export const CategoryProductGrid = ({
               className={`flex flex-col justify-between bg-surface-card border border-bronze-500/[0.14] rounded-2xl max-sm:rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-bronze-500/8 hover:-translate-y-1 transition-all duration-300 ${index === 8 ? "sm:hidden" : ""}`}
             >
               {/* Product Image */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-amber-50 dark:bg-white/5">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-orange-50 dark:bg-white/5">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -241,7 +241,7 @@ export const CategoryProductGrid = ({
               <div className="p-2 sm:p-5 flex-grow flex flex-col justify-between">
                 <div>
                   <div className="hidden sm:flex items-center gap-1.5 mb-2 text-[10px] sm:text-[11px]">
-                    <div className="flex items-center text-amber-500">
+                    <div className="flex items-center text-orange-500">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} size={11} fill="currentColor" className="stroke-none" />
                       ))}
@@ -266,7 +266,7 @@ export const CategoryProductGrid = ({
                 </div>
 
                 <div className="hidden sm:block">
-                  <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-amber-700 dark:text-bronze-400 font-semibold mb-5">
+                  <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-orange-700 dark:text-bronze-400 font-semibold mb-5">
                     <ShieldCheck size={12} />
                     <span className="line-clamp-1">{product.specs}</span>
                   </div>
@@ -290,7 +290,7 @@ export const CategoryProductGrid = ({
             href={viewAllLink}
             className={`inline-flex items-center gap-2 px-8 py-4 rounded-full ${
               accentColor === "rose"
-                ? "bg-amber-500/10 hover:bg-amber-500/20 text-amber-200 border-amber-500/40"
+                ? "bg-orange-500/10 hover:bg-orange-500/20 text-orange-200 border-orange-500/40"
                 : "glass text-heading hover:bg-surface-hover border-bronze-500/20"
             } font-semibold hover:scale-105 active:scale-95 transition-all duration-300 shadow-md border`}
           >

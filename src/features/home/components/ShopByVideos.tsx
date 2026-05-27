@@ -137,7 +137,7 @@ export const ShopByVideos = () => {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-xs font-semibold text-amber-700 dark:text-bronze-300 tracking-wider uppercase mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-xs font-semibold text-orange-700 dark:text-bronze-300 tracking-wider uppercase mb-4"
             >
               <Sparkles size={14} className="text-bronze-500" />
               Watch & Shop
@@ -209,7 +209,7 @@ export const ShopByVideos = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/35 opacity-90 group-hover:opacity-100 transition-opacity" />
                   
                   {/* Floating Tags */}
-                  <div className="absolute top-4 left-4 z-20 bg-gradient-to-r from-bronze-500 to-amber-600 text-white text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-lg">
+                  <div className="absolute top-4 left-4 z-20 bg-gradient-to-r from-bronze-500 to-orange-600 text-white text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-lg">
                     {video.tag}
                   </div>
 
@@ -223,7 +223,7 @@ export const ShopByVideos = () => {
                       <h3 className="text-base sm:text-lg font-bold font-display leading-tight drop-shadow-sm text-white">
                         {video.title}
                       </h3>
-                      <p className="text-xs text-amber-200/90 font-medium mt-1">
+                      <p className="text-xs text-orange-200/90 font-medium mt-1">
                         Featured: {video.product}
                       </p>
                     </div>

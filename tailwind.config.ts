@@ -22,19 +22,19 @@ const config: Config = {
         subtle: "var(--subtle)",
         border: "var(--border)",
 
-        // Bronze accent — same in both themes
+        // Premium orange accent — rich & warm
         bronze: {
-          50: "#faf6f1",
-          100: "#f0e5d5",
-          200: "#e0c9a9",
-          300: "#cda876",
-          400: "#bf8d51",
-          500: "#b17a3f",
-          600: "#9a6234",
-          700: "#7d4b2c",
-          800: "#683e2a",
-          900: "#583526",
-          950: "#311a12",
+          50: "#fff8f0",
+          100: "#ffedd5",
+          200: "#fed7aa",
+          300: "#fdba74",
+          400: "#fb923c",
+          500: "#f97316",
+          600: "#ea580c",
+          700: "#c2410c",
+          800: "#9a3412",
+          900: "#7c2d12",
+          950: "#431407",
         },
       },
       fontFamily: {
@@ -52,8 +52,8 @@ const config: Config = {
           "50%": { transform: "translateY(-20px)" },
         },
         glow: {
-          "0%": { boxShadow: "0 0 20px rgba(191, 141, 81, 0.2)" },
-          "100%": { boxShadow: "0 0 40px rgba(191, 141, 81, 0.4)" },
+          "0%": { boxShadow: "0 0 20px rgba(249, 115, 22, 0.2)" },
+          "100%": { boxShadow: "0 0 40px rgba(249, 115, 22, 0.4)" },
         },
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },

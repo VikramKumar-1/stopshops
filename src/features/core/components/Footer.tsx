@@ -10,11 +10,13 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-bronze-400 to-bronze-600 flex items-center justify-center text-white font-display font-bold text-lg">
-                S
-              </div>
+              <img 
+                src="/logo.jpeg" 
+                alt="StopShop Logo" 
+                className="w-10 h-10 rounded-xl object-cover shadow-md border border-bronze-800"
+              />
               <span className="text-xl font-display font-bold tracking-tight text-white">
-                Stop<span className="text-bronze-400">Shops</span>
+                Stop<span className="text-bronze-400">Shop</span>
               </span>
             </Link>
             <p className="text-bronze-300 max-w-md leading-relaxed">
@@ -63,7 +65,7 @@ export const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-sm">
                 <Mail size={16} className="text-bronze-400 flex-shrink-0" />
-                <span className="text-bronze-300">export@stopshops.com</span>
+                <span className="text-bronze-300">export@stopshop.com</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Phone size={16} className="text-bronze-400 flex-shrink-0" />
@@ -78,7 +80,7 @@ export const Footer = () => {
       <div className="border-t border-bronze-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-bronze-500">
-            &copy; {new Date().getFullYear()} StopShops. All rights reserved.
+            &copy; {new Date().getFullYear()} StopShop. All rights reserved.
           </p>
           <p className="text-xs text-bronze-500">
             Made with pride in India 🇮🇳

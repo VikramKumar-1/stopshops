@@ -66,12 +66,12 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-bronze-500/[0.04] via-surface to-amber-500/[0.05]">
+    <section className="relative min-h-0 xl:min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-bronze-500/[0.04] via-surface to-orange-500/[0.05]">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-amber-500/[0.18] rounded-full blur-[160px]" />
+        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-orange-500/[0.18] rounded-full blur-[160px]" />
         <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] bg-bronze-400/[0.15] rounded-full blur-[160px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-bronze-600/[0.10] rounded-full blur-[200px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-orange-600/[0.10] rounded-full blur-[200px]" />
         <div
           className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]"
           style={{
@@ -81,12 +81,12 @@ export const HeroSection = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-32 pb-12 lg:pt-40 lg:pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-36 pb-12 md:pt-44 md:pb-20 lg:pt-10 xl:pt-12 xl:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-none">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-xs font-medium text-amber-700 dark:text-bronze-300 tracking-wider uppercase">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-xs font-medium text-orange-700 dark:text-bronze-300 tracking-wider uppercase">
                 <Sparkles size={14} className="text-bronze-500" />
                 Premium Indian Bronze Export
               </div>
@@ -135,7 +135,7 @@ export const HeroSection = () => {
               </div>
               <p className="text-sm text-muted">
                 Trusted by buyers in{" "}
-                <span className="text-amber-700 dark:text-bronze-400 font-semibold">20+ countries</span>
+                <span className="text-orange-700 dark:text-bronze-400 font-semibold">20+ countries</span>
               </p>
             </div>
           </div>

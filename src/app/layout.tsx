@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/features/core/components/Navbar";
+import { CategoryStrip } from "@/features/core/components/CategoryStrip";
 import { Footer } from "@/features/core/components/Footer";
 import { ThemeProvider } from "@/features/core/components/ThemeProvider";
 
@@ -16,7 +17,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "StopShops — Premium Bronze & Bartan Export",
+  title: "StopShop — Premium Bronze & Bartan Export",
   description:
     "India's finest bronze cookware & bartan, exported globally. Premium quality, trusted by international buyers.",
 };
@@ -49,6 +50,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Navbar />
+          <CategoryStrip />
           <main className="overflow-x-hidden w-full">{children}</main>
           <Footer />
         </ThemeProvider>

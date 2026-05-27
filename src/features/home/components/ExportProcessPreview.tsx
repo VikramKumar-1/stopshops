@@ -37,7 +37,7 @@ export const ExportProcessPreview = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Export Theme Background Line Art Drawing */}
-        <svg className="absolute right-0 bottom-0 w-[320px] h-[240px] sm:w-[400px] sm:h-[300px] text-amber-700 dark:text-bronze-500 opacity-25 dark:opacity-10 pointer-events-none z-0" viewBox="0 0 500 400" fill="none" stroke="currentColor" strokeWidth="1.2">
+        <svg className="absolute right-0 bottom-0 w-[320px] h-[240px] sm:w-[400px] sm:h-[300px] text-orange-700 dark:text-bronze-500 opacity-25 dark:opacity-10 pointer-events-none z-0" viewBox="0 0 500 400" fill="none" stroke="currentColor" strokeWidth="1.2">
           {/* Sea Wave Lines */}
           <path d="M 0 350 Q 125 330 250 350 T 500 350 M 0 370 Q 125 350 250 370 T 500 370" />
           
@@ -80,7 +80,7 @@ export const ExportProcessPreview = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="text-sm uppercase tracking-[0.2em] text-amber-600 dark:text-bronze-400 font-medium"
+              className="text-sm uppercase tracking-[0.2em] text-orange-600 dark:text-bronze-400 font-medium"
             >
               Our Process
             </motion.p>
@@ -102,7 +102,7 @@ export const ExportProcessPreview = () => {
           >
             <Link
               href="/about"
-              className="group inline-flex items-center gap-2 text-sm text-amber-600 dark:text-bronze-400 hover:text-amber-500 dark:hover:text-bronze-300 transition-colors"
+              className="group inline-flex items-center gap-2 text-sm text-orange-600 dark:text-bronze-400 hover:text-orange-500 dark:hover:text-bronze-300 transition-colors"
             >
               View full process
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

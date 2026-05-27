@@ -4,7 +4,7 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "StopShops delivered exactly what we needed — authentic Indian bronze bartan, beautifully packaged and on time. Exceptional quality.",
+    quote: "StopShop delivered exactly what we needed — authentic Indian bronze bartan, beautifully packaged and on time. Exceptional quality.",
     name: "James Carter",
     role: "Wholesale Buyer, UK",
     flag: "🇬🇧",
@@ -16,7 +16,7 @@ const testimonials = [
     flag: "🇦🇪",
   },
   {
-    quote: "Our customers in Germany love these products. StopShops makes the entire import process seamless and stress-free.",
+    quote: "Our customers in Germany love these products. StopShop makes the entire import process seamless and stress-free.",
     name: "Klaus Weber",
     role: "Retail Chain Manager, Germany",
     flag: "🇩🇪",
@@ -34,7 +34,7 @@ export const TestimonialsSection = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-sm uppercase tracking-[0.2em] text-amber-600 dark:text-bronze-400 font-medium"
+            className="text-sm uppercase tracking-[0.2em] text-orange-600 dark:text-bronze-400 font-medium"
           >
             Testimonials
           </motion.p>
